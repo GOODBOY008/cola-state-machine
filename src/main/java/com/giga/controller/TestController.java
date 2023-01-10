@@ -22,7 +22,7 @@ import java.util.UUID;
 public class TestController {
 
 
-    private BusinessService businessService;
+    private final BusinessService businessService;
 
     public TestController(BusinessService businessService) {
         this.businessService = businessService;
@@ -30,8 +30,8 @@ public class TestController {
 
     @GetMapping("/test/ddd")
     public String testDDD() {
-        StateMachine stateMachine =  StateMachineFactory.get(StateMachineInit.MACHINE_ID);
-        GigaStates target = (GigaStates) stateMachine.fireEvent(GigaStates.STATE1, GigaEvents.EVENT1, new StateMachineContext("Giga", UUID.randomUUID().toString(), businessService));
+        StateMachine<GigaStates,GigaEvents,StateMachineContext> stateMachine =  StateMachineFactory.get(StateMachineInit.MACHINE_ID);
+        GigaStates target = stateMachine.fireEvent(GigaStates.STATE1, GigaEvents.EVENT1, new StateMachineContext("Giga", UUID.randomUUID().toString(), businessService));
         return target.name();
     }
 }

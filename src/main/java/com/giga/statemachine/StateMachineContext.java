@@ -7,10 +7,10 @@ import com.giga.service.BusinessService;
  */
 
 public class StateMachineContext {
-    private String operator;
-    private String entityId;
+    private final String operator;
+    private final String entityId;
 
-    private BusinessService businessService;
+    private final BusinessService businessService;
 
     public StateMachineContext(String operator, String entityId, BusinessService businessService) {
         this.operator = operator;
